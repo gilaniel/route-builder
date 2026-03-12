@@ -97,8 +97,8 @@ export default function MapRoute() {
       from: decodeURIComponent(searchParams.get("from")) || "",
       to: decodeURIComponent(searchParams.get("to")) || "",
       date: searchParams.get("date") || new Date().toISOString().slice(0, 10),
-      carNumber: searchParams.get("carNumber") || "",
-      routeNumber: searchParams.get("routeNumber") || "",
+      carNumber: decodeURIComponent(searchParams.get("carNumber")) || "",
+      routeNumber: decodeURIComponent(searchParams.get("routeNumber")) || "",
     };
 
     initParams(params);
