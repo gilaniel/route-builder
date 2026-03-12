@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+body,
+html {
+  overflow-x: hidden;
+}
+
 @keyframes slideIn {
   from {
     transform: translateX(100%);

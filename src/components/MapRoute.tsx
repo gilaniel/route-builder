@@ -15,6 +15,7 @@ export default function MapRoute() {
   const [searchParams] = useSearchParams();
 
   const [isLoading, setLoading] = useState(false);
+  const [isPrinting, setIsPrinting] = useState(false);
 
   const { showToast } = useToast();
 
@@ -26,9 +27,29 @@ export default function MapRoute() {
   const handlePrint = useReactToPrint({
     contentRef,
     documentTitle: `Рейс ${routeNumber}`,
+    onBeforePrint: async () => {
+      // 1. Делаем контейнер широким (под формат А4)
+      setIsPrinting(true);
+
+      // 2. Ждем 100мс, чтобы React успел применить CSS классы ширины к DOM-дереву
+      await new Promise((resolve) => setTimeout(resolve, 100));
+
+      // 3. Заставляем карту понять, что её контейнер стал широким
+      if (mapInstance) {
+        mapInstance.container.fitToViewport();
+      }
+    },
     onAfterPrint: () => {
+      setIsPrinting(false);
       setLoading(false);
       showToast("Скачивание завершено", "success");
+
+      // Возвращаем карту к мобильным размерам
+      setTimeout(() => {
+        if (mapInstance) {
+          mapInstance.container.fitToViewport();
+        }
+      }, 100);
     },
   });
 
@@ -89,7 +110,7 @@ export default function MapRoute() {
   }, [from, to, setRouteInfo, ymapsInstance, mapInstance]);
 
   useEffect(() => {
-    buildRoute();
+    // buildRoute();
   }, [buildRoute]);
 
   useEffect(() => {
@@ -107,7 +128,7 @@ export default function MapRoute() {
   }, [searchParams, initParams]);
 
   return (
-    <div className="bg-gray-100 pt-5 max-w-[1200px] w-full mx-auto flex flex-col items-start">
+    <div className="bg-gray-100 pt-5 max-w-[1200px] w-full mx-auto flex flex-col items-start pb-10">
       <div className="px-5">
         <Link to="/">
           <button className="flex gap-2 items-center border-0 bg-gray-400 rounded-md px-3 py-2 text-white hover:bg-gray-600 active:bg-gray-800 transition-colors">
@@ -115,7 +136,10 @@ export default function MapRoute() {
           </button>
         </Link>
       </div>
-      <div className="grow px-5 w-full" ref={contentRef}>
+      <div
+        className={`grow px-5 bg-gray-100 transition-all ${isPrinting ? "w-[800px] min-w-[800px]" : "w-full"}`}
+        ref={contentRef}
+      >
         <div className="py-5">
           <div className="m-auto h-[600px]">
             <div className="rounded-2xl overflow-hidden shadow-inner border border-gray-200 bg-white w-full h-full">
