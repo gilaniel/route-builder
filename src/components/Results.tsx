@@ -13,78 +13,62 @@ export const Results = () => {
         <span className="font-bold text-2xl">{routeNumber}</span>
       </h2>
 
-      <div className="grid grid-cols-2  gap-4">
-        <div className="bg-gray-50 p-4 rounded-xl border border-gray-100 shadow-lg">
-          <div className="flex items-center gap-2 text-gray-500 mb-2">
-            <Calendar className="w-4 h-4" />
-            <span className="text-xs font-medium uppercase tracking-wider">
-              Дата
-            </span>
-          </div>
-          <div className="text-xl font-bold text-gray-900">
-            {format(date, "dd.MM.yyyy") || "—"}
-          </div>
+      <div className="grid grid-cols-2  gap-4 bg-gray-50 rounded-xl border border-gray-100 shadow-lg px-4 py-3">
+        <div className="flex items-center gap-2 text-gray-500 mb-2">
+          <Calendar className="w-4 h-4" />
+          <span className="text-xs font-medium uppercase tracking-wider">
+            Дата
+          </span>
+        </div>
+        <div className="text-xl font-bold text-gray-900">
+          {format(date, "dd.MM.yyyy") || "—"}
         </div>
 
-        <div className="bg-gray-50 p-4 rounded-xl border border-gray-100 shadow-lg">
-          <div className="flex items-center gap-2 text-gray-500 mb-2">
-            <Clock className="w-4 h-4" />
-            <span className="text-xs font-medium uppercase tracking-wider">
-              Начало
-            </span>
-          </div>
-          <div className="text-xl font-bold text-gray-900">
-            {format(start, "dd.MM.yyyy HH:mm") || "—"}
-          </div>
+        <div className="flex items-center gap-2 text-gray-500 mb-2">
+          <Clock className="w-4 h-4" />
+          <span className="text-xs font-medium uppercase tracking-wider">
+            Начало
+          </span>
+        </div>
+        <div className="text-xl font-bold text-gray-900">
+          {format(start, "dd.MM.yyyy HH:mm") || "—"}
         </div>
 
-        <div className="bg-gray-50 p-4 rounded-xl border border-gray-100 shadow-lg">
-          <div className="flex items-center gap-2 text-gray-500 mb-2">
-            <Clock className="w-4 h-4" />
-            <span className="text-xs font-medium uppercase tracking-wider">
-              Конец
-            </span>
-          </div>
-          <div className="text-xl font-bold text-gray-900">
-            {end ? format(end, "dd.MM.yyyy HH:mm") : "—"}
-          </div>
+        <div className="flex items-center gap-2 text-gray-500 mb-2">
+          <Clock className="w-4 h-4" />
+          <span className="text-xs font-medium uppercase tracking-wider">
+            Конец
+          </span>
+        </div>
+        <div className="text-xl font-bold text-gray-900">
+          {end ? format(end, "dd.MM.yyyy HH:mm") : "—"}
         </div>
 
-        <div className="bg-gray-50 p-4 rounded-xl border border-gray-100 shadow-lg">
-          <div className="flex items-center gap-2 text-gray-500 mb-2">
-            <Car className="w-4 h-4" />
-            <span className="text-xs font-medium uppercase tracking-wider">
-              Автомобиль
-            </span>
-          </div>
-          <div className="text-xl font-bold text-gray-900">
-            {carNumber || "—"}
-          </div>
+        <div className="flex items-center gap-2 text-gray-500 mb-2">
+          <Car className="w-4 h-4" />
+          <span className="text-xs font-medium uppercase tracking-wider">
+            Автомобиль
+          </span>
+        </div>
+        <div className="text-xl font-bold text-gray-900">
+          {carNumber || "—"}
         </div>
 
-        <div className="bg-gray-50 p-4 rounded-xl border border-gray-100 shadow-lg">
-          <div className="flex items-center gap-2 text-gray-500 mb-2">
-            <Route className="w-4 h-4" />
-            <span className="text-xs font-medium uppercase tracking-wider">
-              Пробег
-            </span>
-          </div>
-          <div className="text-xl font-bold text-gray-900">
-            {distance || "—"}
-          </div>
+        <div className="flex items-center gap-2 text-gray-500 mb-2">
+          <Route className="w-4 h-4" />
+          <span className="text-xs font-medium uppercase tracking-wider">
+            Пробег
+          </span>
         </div>
+        <div className="text-xl font-bold text-gray-900">{distance || "—"}</div>
 
-        <div className="bg-gray-50 p-4 rounded-xl border border-gray-100 shadow-lg">
-          <div className="flex items-center gap-2 text-gray-500 mb-2">
-            <Clock className="w-4 h-4" />
-            <span className="text-xs font-medium uppercase tracking-wider">
-              Время в пути
-            </span>
-          </div>
-          <div className="text-xl font-bold text-gray-900">
-            {duration || "—"}
-          </div>
+        <div className="flex items-center gap-2 text-gray-500 mb-2">
+          <Clock className="w-4 h-4" />
+          <span className="text-xs font-medium uppercase tracking-wider">
+            Время в пути
+          </span>
         </div>
+        <div className="text-xl font-bold text-gray-900">{duration || "—"}</div>
       </div>
     </div>
   );

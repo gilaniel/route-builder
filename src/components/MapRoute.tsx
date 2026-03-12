@@ -112,7 +112,7 @@ export default function MapRoute() {
   }, [from, to, setRouteInfo, ymapsInstance, mapInstance]);
 
   useEffect(() => {
-    buildRoute();
+    // buildRoute();
   }, [buildRoute]);
 
   useEffect(() => {
