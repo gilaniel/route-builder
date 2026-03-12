@@ -13,7 +13,7 @@ export const Results = () => {
         <span className="font-bold text-2xl">{routeNumber}</span>
       </h2>
 
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="bg-gray-50 p-4 rounded-xl border border-gray-100 shadow-lg">
           <div className="flex items-center gap-2 text-gray-500 mb-2">
             <Calendar className="w-4 h-4" />
