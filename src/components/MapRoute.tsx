@@ -52,7 +52,7 @@ export default function MapRoute() {
         }
 
         showToast("Скачивание завершено", "success");
-      }, 100);
+      }, 1000);
     },
   });
 
