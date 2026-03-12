@@ -38,6 +38,8 @@ export default function MapRoute() {
       if (mapInstance) {
         mapInstance.container.fitToViewport();
       }
+
+      await new Promise((resolve) => setTimeout(resolve, 600));
     },
     onAfterPrint: () => {
       setIsPrinting(false);
