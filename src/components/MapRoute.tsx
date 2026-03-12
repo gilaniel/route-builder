@@ -38,16 +38,11 @@ export default function MapRoute() {
       await new Promise((resolve) => setTimeout(resolve, 300));
     },
     onAfterPrint: async () => {
-      await new Promise((resolve) => setTimeout(resolve, 400));
+      await new Promise((resolve) => setTimeout(resolve, 1400));
 
       setIsPrinting(false);
 
-      setTimeout(() => {
-        if (mapInstance) {
-          mapInstance.container.fitToViewport();
-        }
-        setLoading(false);
-      }, 1300);
+      setLoading(false);
     },
   });
 
