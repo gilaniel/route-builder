@@ -22,7 +22,7 @@ export const Results = () => {
             </span>
           </div>
           <div className="text-xl font-bold text-gray-900">
-            {format(start, "dd.MM.yyyy") || "—"}
+            {format(date, "dd.MM.yyyy") || "—"}
           </div>
         </div>
 
@@ -46,7 +46,7 @@ export const Results = () => {
             </span>
           </div>
           <div className="text-xl font-bold text-gray-900">
-            {format(end, "dd.MM.yyyy HH:mm") || "—"}
+            {end ? format(end, "dd.MM.yyyy HH:mm") : "—"}
           </div>
         </div>
 
