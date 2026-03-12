@@ -43,6 +43,12 @@ export default function MapRoute() {
       setIsPrinting(false);
 
       setLoading(false);
+
+      setTimeout(() => {
+        if (mapInstance) {
+          mapInstance.container.fitToViewport();
+        }
+      }, 1300);
     },
   });
 
