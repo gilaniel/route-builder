@@ -1,11 +1,12 @@
 import { CreateRoute, useRouteStore } from "./store";
 import MapRoute from "./components/MapRoute";
-import { MapPin, Search, Car, RouteIcon } from "lucide-react";
+import { MapPin, Search, Car, RouteIcon, Clock } from "lucide-react";
 import { YMaps } from "@pbe/react-yandex-maps";
 import AddressInput from "./components/AddressInput";
 import { Controller, useForm } from "react-hook-form";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { ToastProvider } from "./contexts/ToastContext";
+import { format } from "date-fns";
 
 function Create() {
   const { createRoute } = useRouteStore();
@@ -15,7 +16,9 @@ function Create() {
   const defaultValues = {
     from: "",
     to: "",
-    date: new Date().toISOString().slice(0, 10),
+    start: format(new Date(), "yyyy-MM-dd HH:mm"),
+    end: "",
+    date: format(new Date(), "yyyy-MM-dd"),
     carNumber: "",
     routeNumber: "",
   };
@@ -67,6 +70,25 @@ function Create() {
                 )}
                 rules={{ required: true }}
               />
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <Clock className={`h-5 w-5 text-gray-400`} />
+                </div>
+                <Controller
+                  name="start"
+                  control={control}
+                  render={({ field }) => (
+                    <input
+                      type="datetime-local"
+                      value={field.value as string}
+                      onChange={field.onChange}
+                      placeholder="Москва, Красная площадь"
+                      className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 sm:text-sm mt-2"
+                    />
+                  )}
+                  rules={{ required: true }}
+                />
+              </div>
             </div>
 
             <div>
@@ -87,6 +109,26 @@ function Create() {
                 )}
                 rules={{ required: true }}
               />
+
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <Clock className={`h-5 w-5 text-gray-400`} />
+                </div>
+                <Controller
+                  name="end"
+                  control={control}
+                  render={({ field }) => (
+                    <input
+                      type="datetime-local"
+                      value={field.value as string}
+                      onChange={field.onChange}
+                      placeholder="Москва, Красная площадь"
+                      className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 sm:text-sm mt-2"
+                    />
+                  )}
+                  rules={{ required: true }}
+                />
+              </div>
             </div>
 
             <div>
@@ -116,7 +158,7 @@ function Create() {
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Car className={`h-5 w-5`} />
+                  <Car className={`h-5 w-5 text-gray-400`} />
                 </div>
                 <Controller
                   name="carNumber"
@@ -142,7 +184,7 @@ function Create() {
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <RouteIcon className={`h-5 w-5`} />
+                  <RouteIcon className={`h-5 w-5 text-gray-400`} />
                 </div>
                 <Controller
                   name="routeNumber"
@@ -182,11 +224,10 @@ function Create() {
 
 export const App = () => {
   const apikey = import.meta.env.VITE_YANDEX_MAPS_API_KEY || "";
-  const suggest_apikey = import.meta.env.VITE_YANDEX_MAPS_SUGGEST_API_KEY || "";
 
   return (
     <ToastProvider>
-      <YMaps query={{ apikey, lang: "ru_RU", suggest_apikey }}>
+      <YMaps query={{ apikey, lang: "ru_RU" }}>
         <div className="flex flex-col h-screen bg-gray-100 text-gray-900 font-sans">
           <Routes>
             <Route path="/" element={<Create />} />

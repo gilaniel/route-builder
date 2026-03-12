@@ -3,14 +3,8 @@ import { create } from "zustand";
 export type CreateRoute = {
   from: string;
   to: string;
-  date: Date | string;
-  carNumber: string;
-  routeNumber: string;
-};
-
-export type RouteInfo = {
-  distance: string;
-  duration: string;
+  start: Date | string;
+  end: Date | string;
   date: Date | string;
   carNumber: string;
   routeNumber: string;
@@ -21,6 +15,8 @@ interface RouteState {
   to: string;
   distance: string;
   duration: string;
+  start: Date | string;
+  end: Date | string;
   date: Date | string;
   carNumber: string;
   routeNumber: string;
@@ -34,6 +30,8 @@ interface RouteState {
 export const useRouteStore = create<RouteState>((set, get) => ({
   from: "",
   to: "",
+  start: new Date().toISOString().slice(0, 16),
+  end: "",
   distance: "",
   duration: "",
   date: new Date().toISOString().slice(0, 10),
@@ -52,6 +50,8 @@ export const useRouteStore = create<RouteState>((set, get) => ({
           duration,
           from: get().from,
           to: get().to,
+          start: get().start,
+          end: get().end,
           date: get().date,
           carNumber: get().carNumber,
           routeNumber: get().routeNumber,
@@ -61,8 +61,7 @@ export const useRouteStore = create<RouteState>((set, get) => ({
   },
 
   createRoute: (params) => {
-    const { date, carNumber, routeNumber, from, to } = params;
-    set({ date, carNumber, routeNumber, from, to });
+    set(params);
     localStorage.setItem("route", JSON.stringify(params));
   },
 
@@ -70,6 +69,8 @@ export const useRouteStore = create<RouteState>((set, get) => ({
     set({
       from: params.from || "",
       to: params.to || "",
+      start: params.start || "",
+      end: params.end || "",
       date: params.date || new Date().toISOString().slice(0, 10),
       carNumber: params.carNumber || "",
       routeNumber: params.routeNumber || "",

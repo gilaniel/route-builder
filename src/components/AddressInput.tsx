@@ -26,6 +26,7 @@ export default function AddressInput({
   const debouncedText = useDebounceCallback(value, 500);
 
   useEffect(() => {
+    return;
     if (!ymaps || !debouncedText || !isOpen) {
       setSuggestions([]);
       return;

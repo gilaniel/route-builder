@@ -96,6 +96,8 @@ export default function MapRoute() {
     const params = {
       from: decodeURIComponent(searchParams.get("from")) || "",
       to: decodeURIComponent(searchParams.get("to")) || "",
+      start: decodeURIComponent(searchParams.get("start")) || "",
+      end: decodeURIComponent(searchParams.get("end")) || "",
       date: searchParams.get("date") || new Date().toISOString().slice(0, 10),
       carNumber: decodeURIComponent(searchParams.get("carNumber")) || "",
       routeNumber: decodeURIComponent(searchParams.get("routeNumber")) || "",
@@ -105,15 +107,15 @@ export default function MapRoute() {
   }, [searchParams, initParams]);
 
   return (
-    <div className="bg-gray-100 pt-5 max-w-[1200px] w-full mx-auto px-5 flex flex-col">
-      <div className="">
+    <div className="bg-gray-100 pt-5 max-w-[1200px] w-full mx-auto flex flex-col items-start">
+      <div className="px-5">
         <Link to="/">
           <button className="flex gap-2 items-center border-0 bg-gray-400 rounded-md px-3 py-2 text-white hover:bg-gray-600 active:bg-gray-800 transition-colors">
             {<ArrowLeft />}Назад
           </button>
         </Link>
       </div>
-      <div className="flex-grow " ref={contentRef}>
+      <div className="grow px-5 w-full" ref={contentRef}>
         <div className="py-5">
           <div className="m-auto h-[600px]">
             <div className="rounded-2xl overflow-hidden shadow-inner border border-gray-200 bg-white w-full h-full">
@@ -137,18 +139,16 @@ export default function MapRoute() {
             <Results />
           </div>
         </div>
-        <div className="m-auto ">
-          <button
-            onClick={() => {
-              setLoading(true);
-              handlePrint();
-            }}
-            className="flex gap-2 items-center border-0 bg-gray-400 rounded-md px-3 py-2 text-white hover:bg-gray-600 active:bg-gray-800 transition-colors"
-          >
-            {isLoading ? <Loader className="animate-spin" /> : <Download />}PDF
-          </button>
-        </div>
       </div>
+      <button
+        onClick={() => {
+          setLoading(true);
+          handlePrint();
+        }}
+        className="ml-5 flex gap-2 items-center border-0 bg-gray-400 rounded-md px-3 py-2 text-white hover:bg-gray-600 active:bg-gray-800 transition-colors"
+      >
+        {isLoading ? <Loader className="animate-spin" /> : <Download />}PDF
+      </button>
     </div>
   );
 }
