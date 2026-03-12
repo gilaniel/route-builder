@@ -140,7 +140,7 @@ export default function MapRoute() {
         </Link>
       </div>
       <div
-        className={`grow px-5 bg-gray-100 transition-all ${isPrinting ? "w-[600px] min-w-[600px]" : "w-full"}`}
+        className={`grow px-5 bg-gray-100 transition-all ${isPrinting ? "w-[790px] min-w-[790px] lg:w-full lg:min-w-full" : "w-full"}`}
         ref={contentRef}
       >
         <div className="py-5">
