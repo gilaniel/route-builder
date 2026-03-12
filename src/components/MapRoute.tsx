@@ -38,7 +38,7 @@ export default function MapRoute() {
       await new Promise((resolve) => setTimeout(resolve, 300));
     },
     onAfterPrint: async () => {
-      await new Promise((resolve) => setTimeout(resolve, 1400));
+      await new Promise((resolve) => setTimeout(resolve, 400));
 
       setIsPrinting(false);
 
@@ -130,7 +130,7 @@ export default function MapRoute() {
         </Link>
       </div>
       <div
-        className={`grow px-5 bg-gray-100 transition-all print:bg-white print:px-0 ${isPrinting ? "w-[750px] min-w-[750px] m-auto" : "w-full"}`}
+        className={`grow px-5 bg-gray-100 transition-all print:bg-white print:px-0 ${isPrinting ? "w-[800px] min-w-[800px] m-auto" : "w-full"}`}
         ref={contentRef}
       >
         <div className="py-5">
