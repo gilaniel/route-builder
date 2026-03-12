@@ -4,8 +4,6 @@ import { useRouteStore } from "../store";
 import { Results } from "./Results";
 import { useReactToPrint } from "react-to-print";
 import { ArrowLeft, Download, Loader } from "lucide-react";
-import { resolve } from "path";
-import { useToast } from "../contexts/ToastContext";
 import { Link, useSearchParams } from "react-router-dom";
 
 export default function MapRoute() {
@@ -16,8 +14,6 @@ export default function MapRoute() {
 
   const [isLoading, setLoading] = useState(false);
   const [isPrinting, setIsPrinting] = useState(false);
-
-  const { showToast } = useToast();
 
   const routeRef = useRef<any>(null);
   const { from, to, routeNumber, setRouteInfo, initParams } = useRouteStore();
@@ -41,18 +37,17 @@ export default function MapRoute() {
 
       await new Promise((resolve) => setTimeout(resolve, 300));
     },
-    onAfterPrint: () => {
-      // setIsPrinting(false);
-      setLoading(false);
+    onAfterPrint: async () => {
+      await new Promise((resolve) => setTimeout(resolve, 400));
 
-      // Возвращаем карту к мобильным размерам
-      // setTimeout(() => {
-      //   if (mapInstance) {
-      //     mapInstance.container.fitToViewport();
-      //   }
+      setIsPrinting(false);
 
-      //   showToast("Скачивание завершено", "success");
-      // }, 1000);
+      setTimeout(() => {
+        if (mapInstance) {
+          mapInstance.container.fitToViewport();
+        }
+        setLoading(false);
+      }, 1300);
     },
   });
 
@@ -131,8 +126,8 @@ export default function MapRoute() {
   }, [searchParams, initParams]);
 
   return (
-    <div className="bg-gray-100 pt-5 max-w-[1200px] w-full mx-auto flex flex-col items-start pb-10">
-      <div className="">
+    <div className="bg-gray-100 pt-5 max-w-[1200px] w-full mx-auto flex flex-col items-start pb-10 print:bg-white print:pt-0">
+      <div className="px-5 print:hidden">
         <Link to="/">
           <button className="flex gap-2 items-center border-0 bg-gray-400 rounded-md px-3 py-2 text-white hover:bg-gray-600 active:bg-gray-800 transition-colors">
             {<ArrowLeft />}Назад
@@ -140,7 +135,7 @@ export default function MapRoute() {
         </Link>
       </div>
       <div
-        className={`grow  bg-gray-100 transition-all ${isPrinting ? "w-[750px] min-w-[750px] lg:w-full lg:min-w-full" : "w-full"}`}
+        className={`grow px-5 bg-gray-100 transition-all print:bg-white print:px-0 ${isPrinting ? "w-[750px] min-w-[750px] m-auto" : "w-full"}`}
         ref={contentRef}
       >
         <div className="py-5">
@@ -172,7 +167,7 @@ export default function MapRoute() {
           setLoading(true);
           handlePrint();
         }}
-        className="ml-5 flex gap-2 items-center border-0 bg-gray-400 rounded-md px-3 py-2 text-white hover:bg-gray-600 active:bg-gray-800 transition-colors"
+        className="ml-5 flex gap-2 items-center border-0 bg-gray-400 rounded-md px-3 py-2 text-white hover:bg-gray-600 active:bg-gray-800 transition-colors print:hidden"
       >
         {isLoading ? <Loader className="animate-spin" /> : <Download />}PDF
       </button>
