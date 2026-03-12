@@ -132,7 +132,7 @@ export default function MapRoute() {
 
   return (
     <div className="bg-gray-100 pt-5 max-w-[1200px] w-full mx-auto flex flex-col items-start pb-10">
-      <div className="px-5">
+      <div className="">
         <Link to="/">
           <button className="flex gap-2 items-center border-0 bg-gray-400 rounded-md px-3 py-2 text-white hover:bg-gray-600 active:bg-gray-800 transition-colors">
             {<ArrowLeft />}Назад
@@ -140,7 +140,7 @@ export default function MapRoute() {
         </Link>
       </div>
       <div
-        className={`grow px-5 bg-gray-100 transition-all ${isPrinting ? "w-[750px] min-w-[750px] lg:w-full lg:min-w-full" : "w-full"}`}
+        className={`grow  bg-gray-100 transition-all ${isPrinting ? "w-[750px] min-w-[750px] lg:w-full lg:min-w-full" : "w-full"}`}
         ref={contentRef}
       >
         <div className="py-5">
