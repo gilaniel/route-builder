@@ -44,13 +44,14 @@ export default function MapRoute() {
     onAfterPrint: () => {
       setIsPrinting(false);
       setLoading(false);
-      showToast("Скачивание завершено", "success");
 
       // Возвращаем карту к мобильным размерам
       setTimeout(() => {
         if (mapInstance) {
           mapInstance.container.fitToViewport();
         }
+
+        showToast("Скачивание завершено", "success");
       }, 100);
     },
   });
@@ -112,7 +113,7 @@ export default function MapRoute() {
   }, [from, to, setRouteInfo, ymapsInstance, mapInstance]);
 
   useEffect(() => {
-    // buildRoute();
+    buildRoute();
   }, [buildRoute]);
 
   useEffect(() => {
@@ -139,7 +140,7 @@ export default function MapRoute() {
         </Link>
       </div>
       <div
-        className={`grow px-5 bg-gray-100 transition-all ${isPrinting ? "max-w-[1200px] w-full" : "w-full"}`}
+        className={`grow px-5 bg-gray-100 transition-all ${isPrinting ? "w-[800px] min-w-[800px]" : "w-full"}`}
         ref={contentRef}
       >
         <div className="py-5">

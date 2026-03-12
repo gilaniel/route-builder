@@ -7,7 +7,7 @@ export const Results = () => {
     useRouteStore();
 
   return (
-    <div className="mt-25 border-t border-gray-100 pt-6">
+    <div className="border-t border-gray-100 pt-6">
       <h2 className="text-lg font-semibold text-gray-900 mb-4">
         Информация о рейсе{" "}
         <span className="font-bold text-2xl">{routeNumber}</span>
