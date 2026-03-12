@@ -23,32 +23,9 @@ export default function MapRoute() {
   const handlePrint = useReactToPrint({
     contentRef,
     documentTitle: `Рейс ${routeNumber}`,
-    onBeforePrint: async () => {
-      // 1. Делаем контейнер широким (под формат А4)
-      setIsPrinting(true);
 
-      // 2. Ждем 100мс, чтобы React успел применить CSS классы ширины к DOM-дереву
-      await new Promise((resolve) => setTimeout(resolve, 100));
-
-      // 3. Заставляем карту понять, что её контейнер стал широким
-      if (mapInstance) {
-        mapInstance.container.fitToViewport();
-      }
-
-      await new Promise((resolve) => setTimeout(resolve, 300));
-    },
     onAfterPrint: async () => {
-      await new Promise((resolve) => setTimeout(resolve, 400));
-
-      setIsPrinting(false);
-
       setLoading(false);
-
-      setTimeout(() => {
-        if (mapInstance) {
-          mapInstance.container.fitToViewport();
-        }
-      }, 1300);
     },
   });
 
@@ -127,7 +104,7 @@ export default function MapRoute() {
   }, [searchParams, initParams]);
 
   return (
-    <div className="bg-gray-100 pt-5 max-w-[1200px] w-full mx-auto flex flex-col items-start pb-10 print:bg-white print:pt-0">
+    <div className="bg-gray-100 pt-5 max-w-[800px] w-full mx-auto flex flex-col items-start pb-10">
       <div className="px-5 print:hidden">
         <Link to="/">
           <button className="flex gap-2 items-center border-0 bg-gray-400 rounded-md px-3 py-2 text-white hover:bg-gray-600 active:bg-gray-800 transition-colors">
@@ -136,7 +113,7 @@ export default function MapRoute() {
         </Link>
       </div>
       <div
-        className={`grow px-5 bg-gray-100 transition-all print:bg-white print:px-0 ${isPrinting ? "w-[800px] min-w-[800px] m-auto" : "w-full"}`}
+        className={`grow px-5 bg-gray-100 transition-all w-full`}
         ref={contentRef}
       >
         <div className="py-5">
