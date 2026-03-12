@@ -105,8 +105,8 @@ export default function MapRoute() {
   }, [searchParams, initParams]);
 
   return (
-    <div className="bg-gray-100 pt-5 w-[1200px] mx-auto px-5">
-      <div className="px-5">
+    <div className="bg-gray-100 pt-5 max-w-[1200px] w-full mx-auto px-5 flex flex-col">
+      <div className="">
         <Link to="/">
           <button className="flex gap-2 items-center border-0 bg-gray-400 rounded-md px-3 py-2 text-white hover:bg-gray-600 active:bg-gray-800 transition-colors">
             {<ArrowLeft />}Назад
@@ -115,7 +115,7 @@ export default function MapRoute() {
       </div>
       <div className="flex-grow " ref={contentRef}>
         <div className="py-5">
-          <div className="px-5 m-auto h-[600px]">
+          <div className="m-auto h-[600px]">
             <div className="rounded-2xl overflow-hidden shadow-inner border border-gray-200 bg-white w-full h-full">
               <Map
                 defaultState={{
@@ -133,11 +133,11 @@ export default function MapRoute() {
             </div>
           </div>
 
-          <div className="m-auto px-5">
+          <div className="m-auto ">
             <Results />
           </div>
         </div>
-        <div className="m-auto px-5">
+        <div className="m-auto ">
           <button
             onClick={() => {
               setLoading(true);

@@ -42,8 +42,8 @@ function Create() {
   };
 
   return (
-    <>
-      <div className="w-125 m-auto bg-white shadow-xl z-10 flex flex-col my-5">
+    <div className="px-5">
+      <div className="max-w-125 w-full m-auto bg-white shadow-xl z-10 flex flex-col my-5">
         <div className="p-6 grow flex flex-col gap-6">
           <form
             onSubmit={handleSubmit(onSubmit)}
@@ -176,7 +176,7 @@ function Create() {
           {/* Results */}
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
