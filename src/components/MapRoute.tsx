@@ -6,18 +6,20 @@ import { useReactToPrint } from "react-to-print";
 import { ArrowLeft, Download, Loader } from "lucide-react";
 import { resolve } from "path";
 import { useToast } from "../contexts/ToastContext";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 export default function MapRoute() {
   const [mapInstance, setMapInstance] = useState<any>(null);
   const [ymapsInstance, setYmapsInstance] = useState<any>(null);
+
+  const [searchParams] = useSearchParams();
 
   const [isLoading, setLoading] = useState(false);
 
   const { showToast } = useToast();
 
   const routeRef = useRef<any>(null);
-  const { from, to, routeNumber, setRouteInfo } = useRouteStore();
+  const { from, to, routeNumber, setRouteInfo, initParams } = useRouteStore();
 
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -89,6 +91,18 @@ export default function MapRoute() {
   useEffect(() => {
     buildRoute();
   }, [buildRoute]);
+
+  useEffect(() => {
+    const params = {
+      from: decodeURIComponent(searchParams.get("from")) || "",
+      to: decodeURIComponent(searchParams.get("to")) || "",
+      date: searchParams.get("date") || new Date().toISOString().slice(0, 10),
+      carNumber: searchParams.get("carNumber") || "",
+      routeNumber: searchParams.get("routeNumber") || "",
+    };
+
+    initParams(params);
+  }, [searchParams, initParams]);
 
   return (
     <div className="bg-gray-100 pt-5 w-[1200px] mx-auto px-5">

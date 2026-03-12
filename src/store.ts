@@ -28,6 +28,7 @@ interface RouteState {
   setTo: (to: string) => void;
   setRouteInfo: (distance: string, duration: string) => void;
   createRoute: (params: CreateRoute) => void;
+  initParams: (params: Partial<CreateRoute>) => void;
 }
 
 export const useRouteStore = create<RouteState>((set, get) => ({
@@ -63,5 +64,15 @@ export const useRouteStore = create<RouteState>((set, get) => ({
     const { date, carNumber, routeNumber, from, to } = params;
     set({ date, carNumber, routeNumber, from, to });
     localStorage.setItem("route", JSON.stringify(params));
+  },
+
+  initParams: (params) => {
+    set({
+      from: params.from || "",
+      to: params.to || "",
+      date: params.date || new Date().toISOString().slice(0, 10),
+      carNumber: params.carNumber || "",
+      routeNumber: params.routeNumber || "",
+    });
   },
 }));

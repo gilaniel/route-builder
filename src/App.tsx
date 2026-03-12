@@ -32,7 +32,13 @@ function Create() {
   const onSubmit = (data: CreateRoute) => {
     createRoute(data);
     reset();
-    navigate("/route");
+
+    const params = new URLSearchParams();
+    Object.entries(data).forEach(([key, value]) => {
+      if (value) params.append(key, encodeURIComponent(String(value)));
+    });
+
+    navigate(`/route?${params.toString()}`);
   };
 
   return (
