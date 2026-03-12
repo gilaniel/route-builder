@@ -32,27 +32,27 @@ export default function MapRoute() {
       setIsPrinting(true);
 
       // 2. Ждем 100мс, чтобы React успел применить CSS классы ширины к DOM-дереву
-      await new Promise((resolve) => setTimeout(resolve, 400));
+      await new Promise((resolve) => setTimeout(resolve, 100));
 
       // 3. Заставляем карту понять, что её контейнер стал широким
       if (mapInstance) {
         mapInstance.container.fitToViewport();
       }
 
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 300));
     },
     onAfterPrint: () => {
-      setIsPrinting(false);
+      // setIsPrinting(false);
       setLoading(false);
 
       // Возвращаем карту к мобильным размерам
-      setTimeout(() => {
-        if (mapInstance) {
-          mapInstance.container.fitToViewport();
-        }
+      // setTimeout(() => {
+      //   if (mapInstance) {
+      //     mapInstance.container.fitToViewport();
+      //   }
 
-        showToast("Скачивание завершено", "success");
-      }, 1000);
+      //   showToast("Скачивание завершено", "success");
+      // }, 1000);
     },
   });
 
