@@ -32,14 +32,14 @@ export default function MapRoute() {
       setIsPrinting(true);
 
       // 2. Ждем 100мс, чтобы React успел применить CSS классы ширины к DOM-дереву
-      await new Promise((resolve) => setTimeout(resolve, 100));
+      await new Promise((resolve) => setTimeout(resolve, 400));
 
       // 3. Заставляем карту понять, что её контейнер стал широким
       if (mapInstance) {
         mapInstance.container.fitToViewport();
       }
 
-      await new Promise((resolve) => setTimeout(resolve, 600));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
     },
     onAfterPrint: () => {
       setIsPrinting(false);
@@ -144,7 +144,7 @@ export default function MapRoute() {
         ref={contentRef}
       >
         <div className="py-5">
-          <div className="m-auto h-[600px]">
+          <div className="m-auto h-[500px]">
             <div className="rounded-2xl overflow-hidden shadow-inner border border-gray-200 bg-white w-full h-full">
               <Map
                 defaultState={{
