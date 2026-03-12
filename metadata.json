@@ -1,0 +1,5 @@
+{
+  "name": "Yandex Route Builder",
+  "description": "Build routes using Yandex Maps, showing distance and travel time.",
+  "requestFramePermissions": []
+}
