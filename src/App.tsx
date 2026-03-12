@@ -79,10 +79,10 @@ function Create() {
                   control={control}
                   render={({ field }) => (
                     <input
+                      {...field}
                       type="datetime-local"
                       value={field.value as string}
                       onChange={field.onChange}
-                      placeholder="Москва, Красная площадь"
                       className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 sm:text-sm mt-2"
                     />
                   )}
@@ -119,11 +119,13 @@ function Create() {
                   control={control}
                   render={({ field }) => (
                     <input
+                      {...field}
                       type="datetime-local"
                       value={field.value as string}
                       onChange={field.onChange}
-                      placeholder="Москва, Красная площадь"
-                      className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 sm:text-sm mt-2"
+                      className={`block w-full pl-10 pr-3 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500 sm:text-sm mt-2 ${
+                        errors.end ? "border-red-500" : "border-gray-300"
+                      }`}
                     />
                   )}
                   rules={{ required: true }}
@@ -144,6 +146,7 @@ function Create() {
                     className={`block w-full px-3 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500 sm:text-sm ${
                       errors.date ? "border-red-500" : "border-gray-300"
                     }`}
+                    {...field}
                     value={field.value as string}
                     onChange={field.onChange}
                   />
