@@ -64,9 +64,22 @@ export default function MapRoute() {
       multiRoute.model.events.add("requestsuccess", () => {
         const activeRoute = multiRoute.getActiveRoute();
         if (activeRoute) {
+          const durationInSeconds =
+            activeRoute.properties.get("duration").value;
+
+          const formatDuration = (seconds: number) => {
+            const hours = Math.floor(seconds / 3600);
+            const minutes = Math.ceil((seconds % 3600) / 60);
+
+            if (hours > 0) {
+              return `${hours} ч ${minutes} мин`;
+            }
+            return `${minutes} мин`;
+          };
+
           setRouteInfo(
             activeRoute.properties.get("distance").text,
-            activeRoute.properties.get("duration").text,
+            formatDuration(durationInSeconds),
           );
         } else {
           setRouteInfo("Маршрут не найден", "");
