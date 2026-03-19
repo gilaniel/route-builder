@@ -66,7 +66,7 @@ export const Results = () => {
           <div className="flex items-center gap-2 text-gray-500">
             <Route className="w-4 h-4" />
             <span className="text-xs font-medium uppercase tracking-wider">
-              Пробег
+              Расстояние
             </span>
           </div>
           <div className="text-md font-bold text-gray-900 text-end">
